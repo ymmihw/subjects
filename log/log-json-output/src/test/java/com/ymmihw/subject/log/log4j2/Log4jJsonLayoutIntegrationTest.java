@@ -1,12 +1,13 @@
 package com.ymmihw.subject.log.log4j2;
 
+import static org.junit.Assert.assertTrue;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Log4jJsonLayoutIntegrationTest {
@@ -17,18 +18,16 @@ public class Log4jJsonLayoutIntegrationTest {
 
   @Before
   public void setUp() {
-    // Redirect console output to our stream
-    // System.setOut(ps);
-    // logger = LogManager.getLogger("CONSOLE_JSON_APPENDER");
+    System.setOut(ps);
     logger = LoggerFactory.getLogger(Log4jJsonLayoutIntegrationTest.class);
   }
 
   @Test
   public void whenLogLayoutInJSON_thenOutputIsCorrectJSON() {
-    logger.info( "LOG4J2 Debug message");
-    // String currentLog = consoleOutput.toString();
-    // assertTrue(!currentLog.isEmpty());
-    // assertTrue(isValidJSON(currentLog));
+    logger.info("LOG4J2 Debug message");
+    String currentLog = consoleOutput.toString();
+    assertTrue(!currentLog.isEmpty());
+    assertTrue(isValidJSON(currentLog));
   }
 
   public static boolean isValidJSON(String jsonInString) {
